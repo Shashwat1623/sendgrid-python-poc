@@ -71,18 +71,13 @@ def receive_email():
             print(f"📎 Attachment: {file.filename} ({file.content_type})")
             
             try:
-                # Read file content
-                file_content = file.read()
-                
-                # Generate a clean filename (remove special chars)
-                clean_filename = re.sub(r'[^a-zA-Z0-9._-]', '_', file.filename)
                 
                 # Upload to Cloudinary
                 result = cloudinary.uploader.upload(
-                    file_content,
+                    file,
                     folder="sendgrid-attachments",
                     resource_type="auto",  # auto-detect file type
-                    public_id=f"{os.urandom(8).hex()}_{clean_filename}",
+                    public_id=f"{os.urandom(8).hex()}_{file.filename}",
                 )
                 
                 url = result.get("secure_url")
