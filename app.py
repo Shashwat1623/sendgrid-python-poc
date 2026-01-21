@@ -50,7 +50,9 @@ def receive_email():
     to_email = request.form.get("to", "")
     subject = request.form.get("subject", "")
     text = request.form.get("text", "")
-
+    print(request.form)
+    print(request.files)
+    print(request)
     print(f"From: {from_email}")
     print(f"Subject: {subject}")
 
